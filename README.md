@@ -4,7 +4,7 @@ This repository contains the simulation model of the ECA A9 Autonomous Underwate
 
 ## Dependencies
 This package relies on the **Project DAVE Framework** for underwater hydrodynamics and sensor plugins. 
-Before using this model, ensure that the DAVE workspace (e.g., `dave_ws`) is built and sourced correctly. The main launch files will automatically attempt to source the DAVE environment path if it is located at `/home/lu/dave_ws/install`.
+Before using this model, ensure that the DAVE workspace (e.g., `dave_ws`) is built and sourced correctly.
 
 ## Features
 
@@ -31,8 +31,10 @@ Before using this model, ensure that the DAVE workspace (e.g., `dave_ws`) is bui
 - `worlds/`: Gazebo world files defining the underwater simulation scene.
 
 ## Usage
-This package is primarily launched via the main planning/control launch files in the workspace (e.g., `leaders_planner.launch.py`). It handles spawning the world and the AUV instances with their respective namespaces, enabling multi-agent (swarm) simulations.
-
+This package is primarily launched via the main planning/control launch files in the workspace from the user. You can use your own developed planning algorithms or control algorithms to drive any number of ECA A9 AUVs to your designated target positions via launch files. The simulation will load the dave_ocean_waves_fixed.world environment and spawn the AUV models into it. The process is divided into the following specific steps:
+- Spawn the physical simulation world by loading the dave_ocean_waves_fixed.world file from the model package.
+- Instantiate the eca_a9_dave.urdf.xacro model into the simulation world using the create node from ros_gz_sim.
+- Use a for loop to pass different namespaces (e.g., /auv0, /auv1) to drive any number of ECA A9 AUVs to the specified target positions, enabling formation or multi-agent simulation.
 ## Disclaimer & License Information 
 The basic code associated with the physical world and AUV model under Gazebo Harmonic. This repository is constructed **exclusively for a personal academic paper**. It represents an optimization and refactoring of the ECA A9 model based on existing open-source frameworks, primarily the **Project DAVE** and the **UUV Simulator**. 
 
