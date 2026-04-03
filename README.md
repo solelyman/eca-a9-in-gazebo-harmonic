@@ -4,7 +4,12 @@ This repository contains the simulation model of the ECA A9 Autonomous Underwate
 
 ## Dependencies
 This package relies on the **Project DAVE Framework** for underwater hydrodynamics and sensor plugins. 
-Before using this model, ensure that the DAVE workspace is built and sourced correctly. You can also choose to download the dave_ws package we provide, which only contains hydrodynamic parameters, for a simplified validation of your algorithms.
+Since the DAVE workspace contains numerous files, it is not included in this repository. You must download and build the DAVE workspace (`dave_ws`) yourself from its official source. 
+
+**Important Configuration Step**: 
+Before using this model, you must ensure the DAVE workspace is sourced correctly. The main launch files currently contain a hardcoded path to the DAVE installation. You must open the launch files (e.g., `leaders_planner.launch.py`) and change the variable `dave_prefix = '/home/lu/dave_ws/install'` to match the actual absolute path where you installed `dave_ws` on your computer.
+
+*(Alternatively, if you only need a simplified validation of your algorithms with basic hydrodynamic parameters, you can use a minimal DAVE setup if you have one).*
 
 ## Features
 
