@@ -1,5 +1,4 @@
 # A pysical simulator for ECA A9 
-## Paper Name: A Hierarchical Game-Theoretic Framework with Spatio-Temporal Flow Perception for Underactuated AUV Cooperative Operations
 
 Multi-agent formation control simulation for ECA A9 AUVs in Gazebo Harmonic, integrating a consensus-based formation planner, sliding-mode tracking controller, and data-driven ocean current prediction.
 
@@ -33,18 +32,30 @@ ros2 launch auv_leaders_planner leaders_planner.launch.py gui:=true rviz:=true
 
 ## Architecture
 
-```
-current_predictor ──→ /predicted_current (Twist)
-       │
-       └──→ /ocean_current (Vector3) ──→ Gazebo (flow velocity)
+```mermaid
+flowchart LR
+    subgraph Sensing
+        nc4[NetCDF current data] --> cp[current_predictor]
+    end
 
-planner ──→ reference_state ──→ sf_controller ──→ cmd_vel ──→ thruster_allocator ──→ Gazebo (thrust + fins)
-   ↑                                                                                        │
-   └──── /swarm_comms/auv{id} (neighbor aux vars) ←─────────────────────────────────────────┘
-                                                                                             │
-                                                                                     ros_gz_bridge
-                                                                                        │
-                                                                                 Gazebo odometry
+    subgraph ROS
+        cp -->|"/ocean_current"| gz
+        cp -->|"/predicted_current"| ctrl
+        planner -->|"reference_state"| ctrl[sf_controller]
+        ctrl -->|"cmd_vel"| alloc[thruster_allocator]
+    end
+
+    subgraph Gazebo
+        gz[gazebo] -->|"odometry"| ros_gz_bridge
+        ros_gz_bridge -->|"/auv{id}/odom"| ctrl
+        ros_gz_bridge -->|"/auv{id}/odom"| planner
+        alloc -->|"thrust + fin cmds"| ros_gz_bridge
+        ros_gz_bridge --> gz
+    end
+
+    subgraph Comms
+        planner -->|"/swarm_comms/auv{id}"| planner
+    end
 ```
 
 ## Key Parameters
