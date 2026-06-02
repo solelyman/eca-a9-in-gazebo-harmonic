@@ -1,0 +1,46 @@
+/**:
+  ros__parameters:
+    vehicle_model:
+      mass: 100.0        
+      mass_11: 4.0       
+      mass_22: 95.0      
+      mass_33: 75.0      
+      volume: 0.098       
+      rho: 1025.0        
+      gravity: 9.81
+      cob_z: 0.08    
+      inertia_yy: 30.0
+      inertia_zz: 35.0
+      damping_11: -8.0
+      damping_55: -20.0
+      damping_66: -32.0
+      
+    controller_gains:
+      lookahead_h: 12.0 
+      lookahead_v: 6.0
+
+      # Surge
+      k_x: 20.0         
+      k_u: 100.0        
+      
+      # Yaw
+      k_psi: 30.0       
+      k_r: 80.0       
+      
+      # Pitch
+      k_theta: 100.0    
+      k_q: 120.0 
+
+    dynamics_limits:
+      max_thrust: 300.0 
+      max_torque: 100.0   
+      max_surge_speed: 2.0
+      max_yaw_rate: 1.0
+      max_pitch_rate: 1.5
+      
+    depth_control:
+      error_threshold: 1.0
+      min_pitch_down: 0.5
+      min_speed: 1.5      
+      pitch_gain: 0.2     
+      max_extra_pitch: 1.0

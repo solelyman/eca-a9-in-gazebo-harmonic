@@ -1,0 +1,32 @@
+/**:
+  ros__parameters:
+    formation_gains:
+      k_x: 0.5
+      k_y: 0.5
+      k_z: 0.5
+    
+    controller_gains:
+      lookahead_h: 2.0
+      lookahead_v: 2.0
+      k_x: 2.0       
+      k_u: 5.0       
+      k_theta: 5.0   
+      k_q: 2.0
+      k_psi: 2.0
+      k_r: 1.0
+      
+    dynamics_limits:
+      max_thrust: 300.0    
+      max_torque: 100.0
+      max_surge_speed: 2.0 
+      max_yaw_rate: 1.0
+      max_pitch_rate: 1.0
+
+    deadzone:
+      enter_radius: 1.0
+      exit_radius: 0.5
+      enter_speed: 0.1
+      enter_s_norm: 0.2
+      enter_rho_norm: 0.5
+      brake_gain: 40.0
+      damping_gain: 15.0
