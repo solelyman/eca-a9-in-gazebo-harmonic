@@ -1,4 +1,5 @@
-# ECA A9 Multi-AUV Formation Demo
+# A pysical simulator for ECA A9 
+## Paper Name: A Hierarchical Game-Theoretic Framework with Spatio-Temporal Flow Perception for Underactuated AUV Cooperative Operations
 
 A multi-agent formation control demo for ECA A9 AUVs, integrating planning, tracking control, and learned ocean current prediction in Gazebo Harmonic with Project DAVE.
 
